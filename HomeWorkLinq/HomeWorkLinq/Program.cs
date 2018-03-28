@@ -133,18 +133,11 @@ namespace HomeWorkLinq
                                                   {
                                                       Author = _.Key,
                                                       Count = _.Count(),
-                                                      Books = _
+                                                      Books = _.Select(x=>x.Name).ToList()
                                                   })
+                                                  .Select(_=>$"{_.Author}; {string.Join(", ", _.Books.ToList())} ")
                                                   .ToList();
-
-            foreach (var group in dictionaryBooks)
-            {
-                Console.WriteLine($"{group.Author} : {group.Count}");
-                foreach (Book book in group.Books)
-                    Console.WriteLine("\t" + book.Name);
-                Console.WriteLine();
-            }
-
+            
             //12.Output all films of "Matt Damon" excluding films with actors whose name are presented in data as strings
 
             var filmsMattDamon = data.Where(_ => _ is Film)
